@@ -125,7 +125,7 @@ router.get('/search', verifyToken, (req, res) => {
 
   userQueries.getUserByUsername(username)
     .then(user => {
-      return noteQueries.searchNotes(query);
+      return noteQueries.searchNotes(user.id, query);
     })
     .then(notes => {
       res.json(notes);

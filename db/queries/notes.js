@@ -60,11 +60,11 @@ const updateNote = function(creatorId, id, title, description) {
 };
 
 // search for notes
-const searchNotes = function(searchQuery) {
-  const params = [searchQuery];
+const searchNotes = function(creatorId, searchQuery) {
+  const params = [creatorId, searchQuery];
   const query = `
     SELECT * FROM notes
-    WHERE description LIKE '%' || $1 || '%';
+    WHERE creator_id = $1 AND description LIKE '%' || $2 || '%';
   `;
   
   return db.query(query, params)
